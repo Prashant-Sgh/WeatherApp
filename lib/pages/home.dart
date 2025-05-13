@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:weather_ui_app/constants.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -35,73 +36,47 @@ class HomePage extends StatelessWidget {
               width: double.infinity,
             ),
             Container(
-                margin: EdgeInsets.only(bottom: 151),
-                height: 390,
-                child: Stack(
-                  children: [
-                    ColorFiltered(
-                      colorFilter: ColorFilter.mode(
-                          Color(0xFF3A3F54).withAlpha((255 * 0.12).toInt()),
-                          // Color(0xFF38103F).withAlpha((255 * 0.19).toInt()),
-                          BlendMode.darken),
-                      child: Image(
-                        image: AssetImage('assets/images/house.png'),
-                      ),
-                    ),
-                  ],
-                )),
+              margin: EdgeInsets.only(bottom: 151),
+              height: 390,
+              child: ColorFiltered(
+                colorFilter: ColorFilter.mode(
+                    Color(0xFF3A3F54).withAlpha((255 * 0.12).toInt()),
+                    BlendMode.darken),
+                child: Image(
+                  image: AssetImage('assets/images/house.png'),
+                ),
+              ),
+            ),
             Container(
               margin: EdgeInsets.only(bottom: 540, top: 90),
-              // height: 183,
+              height: 197,
               // color: Colors.yellow,
-              child: Center(
-                  child: Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
                     'Montreal',
-                    style: TextStyle(
-                      letterSpacing: 0.37,
-                      height: 1,
-                      fontSize: 34,
-                      fontFamily: 'SFProDisplay',
-                    ),
+                    style: kHomeLocationNameStyle,
                   ),
                   SizedBox(height: 9),
-                  Text('19°',
-                      style: TextStyle(
-                          height: 1,
-                          fontSize: 96,
-                          fontFamily: 'SFProDisplay',
-                          fontWeight: FontWeight.w100)),
+                  Text(
+                    '19°',
+                    style: kHomeTempStyle,
+                  ),
                   SizedBox(height: 9),
                   Text(
                     'Mostly Clear',
-                    style: TextStyle(
-                        letterSpacing: 0.38,
-                        height: 1,
-                        fontSize: 20,
-                        fontFamily: 'SFProDisplay',
-                        fontWeight: FontWeight.w600,
-                        color:
-                            Color(0xFFFFFFFF).withAlpha((255 * 0.40).toInt())),
+                    style: kHomeWeathCondStyle,
                   ),
-                  Text('H: 24°  L: 19°',
-                      // textAlign: TextAlign.center,
-                      style: TextStyle(
-                        letterSpacing: 0.38,
-                        // height: 1,
-                        fontSize: 20,
-                        fontFamily: 'SFProDisplay',
-                        fontWeight: FontWeight.w600,
-                      ))
+                  Text(
+                    'H: 24°  L: 19°',
+                    style: kHomeHighLowStyle,
+                  ),
                 ],
-              )),
+              ),
             ),
-
-            // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
             DraggableScrollableSheet(
               initialChildSize: 0.435,
               minChildSize: 0.257,
@@ -117,88 +92,166 @@ class HomePage extends StatelessWidget {
                     topRight: Radius.circular(44),
                   ),
                   child: Stack(children: [
-                    ListView(children: [
-                      Container(
-                        height: 325,
-                        // width: double.infinity,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage(
-                                  'assets/images/forecast_panel_background.png'),
-                              fit: BoxFit.contain),
-                        ),
-                        child: Stack(
-                          children: [
-                            Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 32.0, right: 32.0, top: 27.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'Hourly update',
-                                        style: TextStyle(
-                                            height: 1,
-                                            fontSize: 15,
-                                            color: Color(0xFFEBEBF5).withAlpha(
-                                                (255 * 0.60).toInt()),
-                                            fontFamily: 'SFProDisplay',
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                      Text(
-                                        'Weekly update',
-                                        style: TextStyle(
-                                            height: 1,
-                                            fontSize: 15,
-                                            color: Color(0xFFEBEBF5).withAlpha(
-                                                (255 * 0.60).toInt()),
-                                            fontFamily: 'SFProDisplay',
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ],
-                                  ),
+                    ListView(
+                      children: [
+                        Container(
+                          height: 325,
+                          // width: double.infinity,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(
+                                    'assets/images/forecastBackground.png'),
+                                fit: BoxFit.contain),
+                          ),
+                          child: Stack(
+                            children: [
+                              Positioned(
+                                top: 47,
+                                child: SizedBox(
+                                  child: SvgPicture.asset(
+                                      'assets/icons/forecastIndicator1.svg'),
                                 ),
-                                SizedBox(
-                                  height: 28,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 20.0),
-                                  child: Container(
-                                    height: 160,
-                                    child: ListView(
-                                      controller: controller,
-                                      scrollDirection: Axis.horizontal,
-                                      shrinkWrap: true,
+                              ),
+                              ListView(
+                                controller: controller,
+                              ),
+                              Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 32.0, right: 32.0, top: 27.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        ForecastElements(),
-                                        ForecastElements(),
-                                        ForecastElements(),
-                                        ForecastElements(),
-                                        ForecastElements(),
-                                        ForecastElements(),
-                                        ForecastElements(),
-                                        ForecastElements(),
-                                        ForecastElements(),
+                                        Text(
+                                          'Hourly update',
+                                          style: TextStyle(
+                                              height: 1,
+                                              fontSize: 15,
+                                              color: Color(0xFFEBEBF5)
+                                                  .withAlpha(
+                                                      (255 * 0.60).toInt()),
+                                              fontFamily: 'SFProDisplay',
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                        Text(
+                                          'Weekly update',
+                                          style: TextStyle(
+                                              height: 1,
+                                              fontSize: 15,
+                                              color: Color(0xFFEBEBF5)
+                                                  .withAlpha(
+                                                      (255 * 0.60).toInt()),
+                                              fontFamily: 'SFProDisplay',
+                                              fontWeight: FontWeight.w600),
+                                        ),
                                       ],
                                     ),
                                   ),
-                                )
-                              ],
-                            ),
-                            ListView(
-                              controller: controller,
-                            ),
-                          ],
+                                  SizedBox(
+                                    height: 28,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 20.0),
+                                    child: Container(
+                                      height: 160,
+                                      child: ListView(
+                                        // controller: controller,
+                                        scrollDirection: Axis.horizontal,
+                                        shrinkWrap: true,
+                                        children: [
+                                          ForecastElements(),
+                                          ForecastElements(),
+                                          ForecastElements(),
+                                          ForecastElements(),
+                                          ForecastElements(),
+                                          ForecastElements(),
+                                          ForecastElements(),
+                                          ForecastElements(),
+                                          ForecastElements(),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ]),
+                      ],
+                    ),
                   ]),
                 );
               },
-            )
+            ),
+            // -----------------------------------------------------------------
+
+            Positioned(
+              bottom: 0,
+              right: 0,
+              left: 0,
+              height: 100,
+              child: Stack(
+                children: [
+                  Container(
+                    height: 88,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/tabBarBackground.png'),
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 100,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage(
+                                'assets/images/tabBarSubtract.png'))),
+                  ),
+                  Positioned(
+                    left: 34,
+                    bottom: 24,
+                    child: Container(
+                      height: 44,
+                      width: 44,
+                      child: Image.asset('assets/icons/bHover.png'),
+                    ),
+                  ),
+                  Positioned(
+                    left: 163,
+                    bottom: 20,
+                    child: Container(
+                      height: 66,
+                      width: 66,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(70),
+                        boxShadow: [
+                          BoxShadow(
+                              blurRadius: 20,
+                              spreadRadius: -15,
+                              color: Colors.white54,
+                              offset: Offset(-10, -10))
+                        ],
+                      ),
+                      margin: EdgeInsets.only(bottom: 5),
+                      child: SvgPicture.asset('assets/icons/bPlus.svg'),
+                    ),
+                  ),
+                  Positioned(
+                    right: 34,
+                    bottom: 24,
+                    child: Container(
+                      height: 44,
+                      width: 44,
+                      child: Image.asset('assets/icons/bList.png'),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -225,8 +278,8 @@ class ForecastElements extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                   color: Color(0xFF000000).withAlpha((255 * 0.25).toInt()),
-                  offset: Offset(10, 6),
-                  blurRadius: 13,
+                  offset: Offset(10, 9),
+                  blurRadius: 15,
                   spreadRadius: 0),
             ],
           ),
