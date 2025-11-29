@@ -1,16 +1,9 @@
-# weather_ui_app
+# Weather app
 
-A new Flutter project.
+### Preview
 
-## Getting Started
+<img src="screenshots/Weather app - Flutter.gif" alt="App preview" width=200>
 
-This project is a starting point for a Flutter application.
+### Screenshots
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="screenshots/weather01.png" alt="App preview" width=200>        <img src="screenshots/weather02.png" alt="App preview" width=200>
